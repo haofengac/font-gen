@@ -2,8 +2,7 @@ import os
 from tqdm import tqdm
 import argparse
 import shutil
-from gftools.fonts_public_pb2 import FamilyProto
-from google.protobuf import text_format
+from tools.util import read_metadata
 
 
 def parse_args():
@@ -61,12 +60,7 @@ if __name__ == '__main__':
 			if not os.path.exists(os.path.join(font_dir_in, 'METADATA.pb')):
 				continue
 
-			# check category
-			with open(os.path.join(font_dir_in, 'METADATA.pb')) as f:
-				metadata = FamilyProto()
-				text_data = f.read()
-
-			text_format.Merge(text_data, metadata)
+			metadata = read_metadata(os.path.join(font_dir_in, 'METADATA.pb'))
 			
 			if not metadata.category in category_dict.keys():
 				category_dict[metadata.category] = []
