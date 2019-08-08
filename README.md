@@ -1,2 +1,2 @@
-# font-play
+# font-gen
 Towards production-grade font generation
